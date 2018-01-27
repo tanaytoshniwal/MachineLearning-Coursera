@@ -62,18 +62,26 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a1 = [ones(m, 1) X];
+z2 = a1*Theta1';
+a2 = [ones(size(z2,1),1) sigmoid(z2)];
+z3 = a2*Theta2';
+a3 = sigmoid(z3);
+hyp = a3;
 
+%disp(y)
+%disp(size(y)) 5000x1 
+%disp(size(hyp)) 5000x10
+yd = eye(num_labels);
+y = yd(y,:);
 
-
-
-
-
-
-
-
-
-
-
+J = sum(sum((-y).*log(hyp) - (1-y).*log(1-hyp), 2))/m;
+theta_1 = Theta1(:, 2:end);
+theta_2 = Theta2(:, 2:end);
+theta1sq = theta_1.^2;
+theta2sq = theta_2.^2;
+p = lambda/(2*m) * (sum(sum(theta1sq))+sum(sum(theta2sq)));
+J += p;
 
 
 
