@@ -93,13 +93,13 @@ Del3 = 0;
 del3 = a3 - y;
 Z2 = [ones(m,1) z2];
 del2 = del3*Theta2.*sigmoidGradient(Z2);
-
 del2=del2(:,2:end);
+
 Del2 = Del2 + del2'*a1;
 Del3 = Del3 + del3'*a2;
-Theta1_grad = (1/m) .* Del2;
-Theta2_grad = (1/m) .* Del3;
 
+Theta1_grad = (1/m) .* Del2 + (lambda/m) * [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+Theta2_grad = (1/m) .* Del3 + (lambda/m) * [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
 % -------------------------------------------------------------
 
 % =========================================================================
